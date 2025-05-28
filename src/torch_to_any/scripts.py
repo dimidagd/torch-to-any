@@ -4,7 +4,7 @@
 
 import sys
 
-from torch_to_any.cli import cli
+from torch_to_any import cli
 from torch_to_any.modeling import resnet as Model
 from torch_to_any.ops.onnx import ONNXExporter
 from torch_to_any.ops.torchscript import TorchScriptExporter
@@ -16,8 +16,13 @@ def main(argv: list[str] | None = None) -> int:
     """Run the main script function."""
     args = argv or sys.argv[1:]
     print("Args:", args)
-    cli()
+    # cli.cli()
     return 0
+
+
+def cli() -> None:
+    """Run the command line interface."""
+    cli.cli(prog_name="torch_to_any")
 
 
 def to_onnx(output_model: str) -> None:
