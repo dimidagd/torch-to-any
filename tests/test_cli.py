@@ -9,25 +9,25 @@ def runner():
     return CliRunner()
 
 
-@pytest.mark.parametrize("output_path", ["/tmp/model.onnx", "/var/tmp/model.onnx", "./model.onnx"])
+@pytest.mark.parametrize("output_path", ["./model.onnx", "./a.model.onnx", "./b.model.onnx"])
 def test_to_onnx_command(mocker, runner, output_path):
     """Test the to_onnx CLI command."""
     mock_to_onnx = mocker.patch("torch_to_any.scripts.to_onnx")  # Mock the to_onnx function
-    result = runner.invoke(cli, ["to-onnx", "/tmp/model.onnx"])
+    result = runner.invoke(cli, ["to-onnx", "./model.onnx"])
     # Assertions
     assert result.exit_code == 0
-    mock_to_onnx.assert_called_once_with("/tmp/model.onnx")
-    assert "Model exported to ONNX format at /tmp/model.onnx" in result.output
+    mock_to_onnx.assert_called_once_with("./model.onnx")
+    assert "Model exported to ONNX format at ./model.onnx" in result.output
 
 
-@pytest.mark.parametrize("output_path", ["/tmp/model.pt", "/var/tmp/model.pt", "./model.pt"])
+@pytest.mark.parametrize("output_path", ["./model.pt", "./a.model.pt", "./b.model.pt"])
 def test_to_torchscript_command(mocker, runner, output_path):
     """Test the to_torchscript CLI command."""
     mock_to_torchscript = mocker.patch(
         "torch_to_any.scripts.to_torchscript"
     )  # Mock the to_torchscript function
-    result = runner.invoke(cli, ["to-torchscript", "/tmp/model.pt"])
+    result = runner.invoke(cli, ["to-torchscript", "./model.pt"])
     # Assertions
     assert result.exit_code == 0
-    mock_to_torchscript.assert_called_once_with("/tmp/model.pt")
-    assert "Model exported to TorchScript format at /tmp/model.pt" in result.output
+    mock_to_torchscript.assert_called_once_with("./model.pt")
+    assert "Model exported to TorchScript format at ./model.pt" in result.output

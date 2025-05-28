@@ -1,5 +1,3 @@
-import pytest
-import torch
 from torch_to_any.modeling.models import (
     ImageClassifierModel,
     resnet,
