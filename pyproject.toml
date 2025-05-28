@@ -1,0 +1,108 @@
+# https://docs.astral.sh/uv/reference/settings/
+# https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+
+# PROJECT
+
+[project]
+name = "torch-to-any"
+version = "0.1.0"
+description = "This project showcases how to handle different export formats for ML models"
+authors = [{ name = "dimidagd" }]
+readme = "README.md"
+license = { file = "LICENSE.txt" }
+keywords = ["mlops", "python", "package"]
+requires-python = ">=3.13"
+dependencies = [
+    "hatchling>=1.27.0",
+    "mlflow>=2.20.3",
+    "onnx>=1.18.0",
+    "onnxruntime>=1.22.0",
+    "onnxscript>=0.2.7",
+    "pip>=25.1.1",
+    "torch>=2.7.0",
+    "torchvision>=0.22.0",
+    "uv>=0.7.8",
+]
+
+# LINKS
+
+[project.urls]
+Homepage = "https://github.com/dimidagd/torch-to-any"
+Documentation = "https://dimidagd.github.io/torch-to-any/"
+Repository = "https://github.com/dimidagd/torch-to-anye"
+"Bug Tracker" = "https://github.com/dimidagd/torch-to-any/issues"
+Changelog = "https://github.com/dimidagd/torch-to-any/blob/main/CHANGELOG.md"
+
+# SCRIPTS
+
+[project.scripts]
+torch-to-any = "torch_to_any.scripts:main"
+
+# DEPENDENCIES
+
+[dependency-groups]
+check = [
+    "bandit>=1.8.3",
+    "coverage>=7.6.12",
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.0.0",
+    "pytest-mock>=3.14.0",
+    "pytest-xdist>=3.6.1",
+    "ruff>=0.9.9",
+]
+commit = ["commitizen>=4.4.1", "pre-commit>=4.1.0"]
+dev = ["rust-just>=1.39.0"]
+doc = ["pdoc>=15.0.1"]
+notebook = ["ipykernel>=6.29.5", "nbformat>=5.10.4"]
+
+# TOOLS
+
+[tool.uv]
+default-groups = ["check", "commit", "dev", "doc", "notebook"]
+
+[tool.bandit]
+targets = ["src"]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "pep440"
+version_provider = "pep621"
+update_changelog_on_bump = true
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = ["__main__.py"]
+
+[tool.mypy]
+pretty = true
+python_version = "3.13"
+check_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "--verbosity=2"
+pythonpath = ["src"]
+
+[tool.ruff]
+fix = true
+indent-width = 4
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["D100", "D103"]
+
+# SYSTEMS
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
