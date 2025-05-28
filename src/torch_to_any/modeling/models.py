@@ -29,3 +29,4 @@ def resnet():
 
 
 resnet_expected_sample = torch.randn(1, 3, 224, 224)
+classifier_expected_sample = torch.randn(1, 1, 32, 32)
