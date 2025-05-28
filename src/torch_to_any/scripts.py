@@ -16,11 +16,10 @@ def main(argv: list[str] | None = None) -> int:
     """Run the main script function."""
     args = argv or sys.argv[1:]
     print("Args:", args)
-    # cli.cli()
     return 0
 
 
-def cli() -> None:
+def run_cli() -> None:
     """Run the command line interface."""
     cli.cli(prog_name="torch_to_any")
 

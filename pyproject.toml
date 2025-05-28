@@ -41,7 +41,7 @@ Changelog = "https://github.com/dimidagd/torch-to-any/blob/main/CHANGELOG.md"
 # SCRIPTS
 
 [project.scripts]
-torch-to-any = "torch_to_any.scripts:cli"
+torch-to-any = "torch_to_any.scripts:run_cli"
 
 # DEPENDENCIES
 
