@@ -16,7 +16,7 @@ class TorchScriptExporter(ModelExporter):
     def load_model(self, output_model: str) -> torch.jit.ScriptModule:
         """Load the TorchScript model from the specified file."""
         logger.info(f"Loading TorchScript model from {output_model}...")
-        scripted_model = torch.jit.load(output_model, weights_only=True)
+        scripted_model = torch.jit.load(output_model)
         scripted_model.eval()
         return scripted_model
 
