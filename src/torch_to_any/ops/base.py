@@ -35,12 +35,14 @@ class ModelExporter(ABC):
         pass
 
     @abstractmethod
-    def prepare_single_example_inputs(self, example_inputs: tuple[torch.Tensor]): 
+    def prepare_single_example_inputs(self, example_inputs: tuple[torch.Tensor]):
         """Prepares example inputs for the model."""
         pass
+
     def get_example_inputs(self) -> tuple[torch.Tensor, ...]:
         """Returns a single example input for testing."""
         return (self.test_sample,)
+
     @abstractmethod
     def prepare_batched_example_inputs(self):
         pass
