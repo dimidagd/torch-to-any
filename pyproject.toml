@@ -69,6 +69,7 @@ default-groups = ["check", "commit", "dev", "doc", "notebook"]
 
 [tool.bandit]
 targets = ["src"]
+skips = ["B101"]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
@@ -107,8 +108,7 @@ convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*.py" = ["D100", "D103"]
-[bandit]
-skips = ["B101"]
+
 
 # SYSTEMS
 
