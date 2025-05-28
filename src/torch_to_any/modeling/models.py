@@ -27,4 +27,5 @@ class ImageClassifierModel(nn.Module):
 def resnet():
     return models.resnet50(pretrained=True)
 
+
 resnet_expected_sample = torch.randn(1, 3, 224, 224)
