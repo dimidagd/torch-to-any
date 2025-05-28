@@ -20,7 +20,7 @@ class ONNXExporter(ModelExporter):
         torch_model.eval()
         example_inputs = (super().test_sample,)
 
-        onnx_program = torch.onnx.export(
+        torch.onnx.export(
             torch_model,
             example_inputs,
             f=output_model,
@@ -45,13 +45,16 @@ class ONNXExporter(ModelExporter):
         return [tensor.numpy(force=True) for tensor in example_inputs]
 
     def prepare_batched_example_inputs(self):
-
-        batched = np.repeat(self.test_sample.numpy(force=True), repeats=self.NUM_TEST_SAMPLES, axis=0)
+        batched = np.repeat(
+            self.test_sample.numpy(force=True), repeats=self.NUM_TEST_SAMPLES, axis=0
+        )
         return [batched]
 
     def inference(self, model, inputs) -> torch.Tensor:
         logger.debug(f"Input size: {len(inputs[0])}")
-        onnx_input = {input_arg.name: input_val for input_arg, input_val in zip(model.get_inputs(), inputs)}
+        onnx_input = {
+            input_arg.name: input_val for input_arg, input_val in zip(model.get_inputs(), inputs)
+        }
         onnx_outputs = model.run(None, onnx_input)[0]
         return onnx_outputs
 

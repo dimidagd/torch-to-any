@@ -1,1 +1,1 @@
-from .base import ModelExporter
+from .base import ModelExporter as ModelExporter

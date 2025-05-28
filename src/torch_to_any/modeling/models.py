@@ -24,6 +24,7 @@ class ImageClassifierModel(nn.Module):
 
 
 # Load a pretrained ResNet-50 model
-resnet = lambda: models.resnet50(pretrained=True)
+def resnet():
+    return models.resnet50(pretrained=True)
 
 resnet_expected_sample = torch.randn(1, 3, 224, 224)

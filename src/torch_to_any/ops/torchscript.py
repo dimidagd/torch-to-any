@@ -31,7 +31,7 @@ class TorchScriptExporter(ModelExporter):
         """Validate the exported TorchScript model."""
         logger.info("Validating the TorchScript model...")
         try:
-            loaded_model = self.load_model(output_model)
+            self.load_model(output_model)
             logger.info("TorchScript model is valid and successfully loaded.")
         except Exception as e:
             logger.error(f"Failed to validate TorchScript model: {e}")

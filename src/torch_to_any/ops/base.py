@@ -4,12 +4,12 @@ from abc import ABC, abstractmethod
 import torch
 
 from torch_to_any.logger import logger
-from torch_to_any.modeling import expected_sample
+from torch_to_any.modeling import resnet_expected_sample
 
 
 class ModelExporter(ABC):
     NUM_TEST_SAMPLES = 100
-    test_sample = expected_sample
+    test_sample = resnet_expected_sample
 
     @abstractmethod
     def export(self, torch_model: torch.nn.Module, output_model: str) -> None:
@@ -44,7 +44,7 @@ class ModelExporter(ABC):
         model = self.load_model(output_model)
         example_inputs = self.prepare_batched_example_inputs()
         start_time = time.time()
-        outputs = self.inference(model, example_inputs)
+        self.inference(model, example_inputs)
         elapsed_time = time.time() - start_time
         logger.info(f"Forward pass took {elapsed_time:.6f} seconds.")
 
@@ -57,7 +57,9 @@ class ModelExporter(ABC):
         """Full pipeline: export, validate, and test."""
         from torch_to_any.logger import logger
 
-        logger.info(f"Exporting model to {self.__class__.__name__.replace('Exporter','')} format...")
+        logger.info(
+            f"Exporting model to {self.__class__.__name__.replace('Exporter', '')} format..."
+        )
         self.export(torch_model, output_model)
 
         logger.info("Validating the exported model...")
