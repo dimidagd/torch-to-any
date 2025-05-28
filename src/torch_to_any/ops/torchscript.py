@@ -20,7 +20,7 @@ class TorchScriptExporter(ModelExporter):
         scripted_model.eval()
         return scripted_model
 
-    def prepare_single_example_inputs(self, example_inputs):
+    def prepare_single_example_inputs(self, example_inputs: tuple[torch.Tensor]) -> tuple[torch.Tensor, ...]:
         """Prepares example inputs for the model."""
         return example_inputs
 
