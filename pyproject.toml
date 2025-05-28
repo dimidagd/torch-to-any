@@ -5,7 +5,7 @@
 
 [project]
 name = "torch-to-any"
-version = "0.1.0"
+version = "0.2.0"
 description = "This project showcases how to handle different export formats for ML models"
 authors = [{ name = "dimidagd" }]
 readme = "README.md"
@@ -23,9 +23,8 @@ dependencies = [
     "uv>=0.7.8",
 ]
 dev = [
+    "commitizen>=4.8.2",
     "rust-just>=1.39.0",
-    "black[jupyter]>=25.1.0",
-    "isort>=6.0.1",
     "pip>=25.1.1",
     "uv>=0.7.8",
 ]
@@ -42,7 +41,7 @@ Changelog = "https://github.com/dimidagd/torch-to-any/blob/main/CHANGELOG.md"
 # SCRIPTS
 
 [project.scripts]
-torch-to-any = "torch_to_any.scripts:main"
+torch-to-any = "torch_to_any.scripts:run_cli"
 
 # DEPENDENCIES
 

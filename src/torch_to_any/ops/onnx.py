@@ -40,7 +40,9 @@ class ONNXExporter(ModelExporter):
         logger.info("ONNX model is valid.")
         logger.debug(f"Model graph: {onnx.helper.printable_graph(onnx_model.graph)}")
 
-    def prepare_single_example_inputs(self, example_inputs):
+    def prepare_single_example_inputs(
+        self, example_inputs: tuple[torch.Tensor]
+    ) -> list[np.ndarray]:
         """Prepares example inputs for the model."""
         return [tensor.numpy(force=True) for tensor in example_inputs]
 
@@ -60,7 +62,7 @@ class ONNXExporter(ModelExporter):
 
     def test(self, torch_model: torch.nn.Module, output_model: str) -> None:
         logger.info("Testing the ONNX model...")
-        example_inputs = (super().test_sample,)
+        example_inputs = super().get_example_inputs()
         onnx_inputs = self.prepare_single_example_inputs(example_inputs)
         torch_outputs = torch_model(*example_inputs)
         onnx_outputs = self.inference(self.load_model(output_model), onnx_inputs)
