@@ -5,7 +5,7 @@
 
 [project]
 name = "torch-to-any"
-version = "0.1.0"
+version = "0.2.0"
 description = "This project showcases how to handle different export formats for ML models"
 authors = [{ name = "dimidagd" }]
 readme = "README.md"
